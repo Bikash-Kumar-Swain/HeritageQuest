@@ -853,33 +853,34 @@ export function renderGameModeScreen(passedSite) {
                     background:radial-gradient(circle at 50% 50%, #1c1813 0%, #0a0806 100%);
                     border:1px solid rgba(212,175,55,.35); margin-bottom:10px; cursor: pointer;">
 
-          <!-- FIXED CONDITION HERE (sun_temple OR konark) -->
-          ${(site.id === 'konark' || site.id === 'sun_temple') ? `
+          ${(site.id === 'konark' || site.id === 'sun_temple' || site.id === 'taj_mahal') ? `
             <model-viewer
-              id="konark-3d-model"
-              src="/src/assets/models/konark_sun_temple.glb"
-              alt="Konark Sun Temple 3D Model"
-              camera-controls
-              auto-rotate
-              auto-rotate-delay="1000"
-              rotation-per-second="15deg"
-              shadow-intensity="1"
-              exposure="1"
-              camera-orbit="0deg 70deg 105%"
-              style="width:100%; height:320px; display:block; --poster-color:transparent;"
-            >
+  id="heritage-3d-model"
+  src="${site.id === 'taj_mahal'
+    ? '/src/assets/models/taj_mahal.glb'
+    : '/src/assets/models/konark_sun_temple.glb'}"
+  alt="${site.id === 'taj_mahal' ? 'Taj Mahal 3D Model' : 'Konark Sun Temple 3D Model'}"
+  camera-controls
+  auto-rotate
+  auto-rotate-delay="1000"
+  rotation-per-second="15deg"
+  shadow-intensity="1"
+  exposure="1"
+  camera-orbit="0deg 70deg 105%"
+  style="width:100%; height:320px; display:block; --poster-color:transparent;"
+>
               <!-- Loading poster slot -->
               <div slot="poster"
                    style="display:flex; flex-direction:column; align-items:center; justify-content:center;
                           width:100%; height:100%; color:#ffd700; gap:12px; background:transparent;">
                 <span style="font-size:44px; animation:iconBob 2s ease-in-out infinite;">🏛️</span>
-                <span id="konark-3d-loading-text"
+                <span id="heritage-3d-loading-text"
                       style="font-size:12px; font-weight:bold; letter-spacing:0.5px;">
-                  Loading 3D Konark Sun Temple…
+                  Loading 3D ${site.name}…
                 </span>
                 <div style="width:150px; height:4px; background:rgba(255,255,255,0.12);
                             border-radius:2px; overflow:hidden;">
-                  <div id="konark-3d-progress-bar"
+                  <div id="heritage-3d-progress-bar"
                        style="width:0%; height:100%;
                               background:linear-gradient(90deg,#d4af37,#f59e0b);
                               transition:width 0.3s ease;">
@@ -1908,8 +1909,8 @@ export function renderGameModeScreen(passedSite) {
   }
   /* Ensure model-viewer always fills the stage and its canvas is visible */
   .vmodal-3d-stage model-viewer,
-  #vmodal-3d-stage-container model-viewer,
-  #konark-3d-model {
+#vmodal-3d-stage-container model-viewer,
+#heritage-3d-model {
     width: 100% !important;
     height: 320px !important;
     display: block !important;
@@ -2712,16 +2713,31 @@ export function renderGameModeScreen(passedSite) {
                 if (_pointerMoved) return;
                 // Only show the toast and swap model the first time
                 if (!mv._modelUnlocked) {
-                    mv._modelUnlocked = true;
-                    mv.src = '/src/assets/models/actual_temple.glb';
-                    if (appState && appState.showToast) {
-                        appState.showToast("Actual Temple Model Unlocked! 🏛️", "success");
-                    }
-                }
+    mv._modelUnlocked = true;
+
+    // Only Konark has the second "actual temple" model.
+    if (site.id === 'konark' || site.id === 'sun_temple') {
+        mv.src = '/src/assets/models/actual_temple.glb';
+
+        if (appState && appState.showToast) {
+            appState.showToast(
+                "Actual Konark Temple Model Unlocked! 🏛️",
+                "success"
+            );
+        }
+    } else if (site.id === 'taj_mahal') {
+        if (appState && appState.showToast) {
+            appState.showToast(
+                "Taj Mahal 3D Model Opened! 🕌",
+                "success"
+            );
+        }
+    }
+}
             });
 
-            const pBar = modal.querySelector('#konark-3d-progress-bar');
-            const pText = modal.querySelector('#konark-3d-loading-text');
+            const pBar = modal.querySelector('#heritage-3d-progress-bar');
+            const pText = modal.querySelector('#heritage-3d-loading-text');
             mv.addEventListener('progress', (e) => {
               const pct = Math.round((e.detail.totalProgress || 0) * 100);
               if (pBar) pBar.style.width = `${pct}%`;
