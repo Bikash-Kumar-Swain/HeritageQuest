@@ -1,0 +1,143 @@
+/* ==========================================================================
+   GeoQuest Animations & Transitions
+   ========================================================================== */
+
+@keyframes logoAuraPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.45)) drop-shadow(0 0 35px rgba(212, 175, 55, 0.2));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 28px rgba(245, 214, 125, 0.75)) drop-shadow(0 0 50px rgba(212, 175, 55, 0.4));
+    transform: scale(1.03);
+  }
+}
+
+@keyframes breathingLogo {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.025);
+  }
+}
+
+@keyframes spinCompass {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes goldSheen {
+  0% {
+    transform: translateX(-100%) skewX(-25deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-25deg);
+  }
+}
+
+@keyframes shakeError {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20%, 60% {
+    transform: translateX(-6px);
+  }
+  40%, 80% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes modalBackdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toastSlideDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes toastSlideUpOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+}
+
+@keyframes screenFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes screenFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.99);
+  }
+}
+
+@keyframes badgeShine {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Reusable animation utility classes */
+.anim-pulse-logo {
+  animation: logoAuraPulse 3s ease-in-out infinite;
+}
+
+.anim-shake {
+  animation: shakeError 0.4s ease-in-out;
+}
+
+.anim-fade-in {
+  animation: screenFadeIn var(--transition-smooth) forwards;
+}
+
+.anim-fade-out {
+  animation: screenFadeOut var(--transition-fast) forwards;
+}

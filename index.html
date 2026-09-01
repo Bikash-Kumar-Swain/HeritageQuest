@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+  <title>Heritage Quest — Explore • Discover • Learn</title>
+
+  <meta name="description" content="Heritage Quest mobile exploration game. Discover ancient heritage, ruins, and treasure caches across the realm." />
+
+
+
+  <!-- Google Fonts: Cinzel & Plus Jakarta Sans -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+
+
+  <!-- Stylesheets -->
+
+  <link rel="stylesheet" href="./src/styles/variables.css" />
+
+  <link rel="stylesheet" href="./src/styles/base.css" />
+
+  <link rel="stylesheet" href="./src/styles/animations.css" />
+
+  <link rel="stylesheet" href="./src/styles/components.css" />
+
+  <link rel="stylesheet" href="./src/styles/device-frame.css" />
+
+
+
+  <!--
+
+    IMPORTANT: importmap MUST come before any type="module" scripts.
+
+    Browser ignores importmap if a module script has already been processed.
+
+  -->
+
+  <script type="importmap">
+
+  {
+
+    "imports": {
+
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+
+    }
+
+  }
+
+  </script>
+
+
+
+  <!-- Google Model Viewer for interactive 3D GLB rendering (loaded AFTER importmap) -->
+
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
+</head>
+
+<body>
+
+  <div id="app-wrapper">
+
+    <!-- Mobile Phone Viewport -->
+
+    <main class="phone-viewport" id="phone-viewport">
+
+      <!-- Ancient Stone Texture Overlay -->
+
+      <div class="app-texture"></div>
+
+
+
+      <!-- Floating Gold Embers Canvas -->
+
+      <canvas id="particles-canvas"></canvas>
+
+
+
+      <!-- Active Screen Content Mount -->
+
+      <section id="screen-container" aria-live="polite"></section>
+
+
+
+      <!-- Modals Layer -->
+
+      <div id="modal-container"></div>
+
+
+
+      <!-- Toast Layer -->
+
+      <div id="toast-container" class="toast-container" aria-live="assertive"></div>
+
+
+
+      <!-- iOS Home Indicator -->
+
+      <div class="home-indicator"></div>
+
+    </main>
+
+  </div>
+
+
+
+  <!-- Main JavaScript Module -->
+
+  <script type="module" src="./src/js/app.js"></script>
+
+</body>
+
+</html> 
+
